@@ -1,0 +1,27 @@
+<div class="col-md-12">
+  <h2 class="text-center"> 我加入的讨论版 </h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Post Count</th>
+        <th>Last Update</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @groups.each do |g| %>
+        <tr>
+          <td>#</td>
+          <td> <%= link_to(g.title, group_path(g)) %> </td>
+          <td> <%= g.description %> </td>
+          <td> <%= g.posts.count %> </td>
+          <td> <%= g.updated_at %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</div>
