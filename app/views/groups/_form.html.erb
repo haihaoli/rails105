@@ -1,7 +1,26 @@
+
 <%= simple_form_for @group do |f| %>
   <div class="form-group">
     <%= f.input :title, input_html: { class: "form-control" } %>
     <%= f.input :description, input_html: { class: "form-control" } %>
   </div>
+
+  <%= f.nested_fields_for :posts do |ff| %>
+    <fieldset style="border-left: 5px solid #bbb; margin-bottom: 10px; padding: 10px;">
+      <legend>Post</legend>
+      <div class="form-group">
+        <%= ff.label :content %>
+        <%= ff.text_area :content, :class => "form-control" %>
+      </div>
+
+    </fieldset>
+    <%= ff.remove_nested_fields_link "移除这个票种", :class => "btn btn-danger" %>
+  <% end %>
+  <p class="text-right">
+    <%= f.add_nested_fields_link :posts, "新增票种", :class => "btn btn-default" %>
+  </p>
+
+
+
   <%= f.submit "Submit", class: "btn btn-primary", data: { disable_with: "Submiting..."} %>
   <% end %>

@@ -8,12 +8,19 @@ class GroupsController < ApplicationController
 
   def new
     @group = Group.new
+    @group.posts.build
   end
 
   def create
     @group = Group.new(group_params)
     @group.user = current_user
     if @group.save
+      if @group.posts.build
+        p = @group.posts.create
+        p.group = @group
+        p.user = current_user
+        p.save
+      end
       current_user.join!(@group)
       redirect_to groups_path
       flash[:notice] = "Group created"
@@ -23,10 +30,17 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    @group.posts.build if @group.posts.empty?
   end
 
   def update
     if @group.update(group_params)
+
+        p = @group.posts.create
+        p.group = @group
+        p.user = current_user
+        p.save
+
       redirect_to groups_path
       flash[:notice] = "Update success"
     else
@@ -75,7 +89,7 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:title, :description)
+    params.require(:group).permit(:title, :description, :posts_attributes => [:id, :content, :user_id, :_destroy])
   end
 
   def find_group_and_check_permission

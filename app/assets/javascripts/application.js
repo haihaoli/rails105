@@ -15,6 +15,8 @@
 //= require turbolinks
 //= require bootstrap/alert
 //= require bootstrap/dropdown
+//= require nested_form_fields
+//= require ckeditor/init
 
 
 //= require_tree .
