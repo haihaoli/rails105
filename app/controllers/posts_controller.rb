@@ -48,7 +48,18 @@ class PostsController < ApplicationController
     end
   end
 
+  def reorder
+    @group = Group.find(params[:group_id])
+    @post = Post.find(params[:id])
+    @post.row_order_position = params[:position]
+    @post.save!
 
+    respond_to do |format|
+      format.html { redirect_to group_path(@group) }
+      format.json { render :json => { :message => "ok" } }
+    end
+
+  end
 
 
 

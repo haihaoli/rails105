@@ -5,4 +5,7 @@ class Post < ApplicationRecord
   belongs_to :user
 
   scope :recent, -> { order("created_at DESC")}
+
+  include RankedModel
+  ranks :row_order
 end

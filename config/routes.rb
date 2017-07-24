@@ -6,7 +6,11 @@ Rails.application.routes.draw do
       post :join
       post :quit
     end
-    resources :posts
+    resources :posts do
+      member do
+        post :reorder
+      end
+    end
   end
   root 'groups#index'
 

@@ -17,6 +17,7 @@
 //= require bootstrap/dropdown
 //= require nested_form_fields
 //= require ckeditor/init
+//= require jquery-ui
 
 
 //= require_tree .
